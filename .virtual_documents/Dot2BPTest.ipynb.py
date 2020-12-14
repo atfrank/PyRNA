@@ -1,4 +1,4 @@
-from PyRNA import dotfile2bp, dot2bp, visualize_structure
+from PyRNA import SimRNAfile2bp, dot2bp, visualize_structure
 import pandas as pd
 from sklearn.metrics import recall_score, precision_score, matthews_corrcoef
 
@@ -9,8 +9,8 @@ from sklearn.metrics import recall_score, precision_score, matthews_corrcoef
 # Matthews correlation coefficient (MCC): https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef
 
 
-bp_matrix_ref = dotfile2bp("data/SimRNA/reference.ss")
-bp_matrix_pre = dotfile2bp("data/SimRNA/predicted.ss")
+bp_matrix_ref = SimRNAfile2bp("data/SimRNA/reference.ss")
+bp_matrix_pre = SimRNAfile2bp("data/SimRNA/predicted.ss")
 
 
 ref = pd.DataFrame.from_records(bp_matrix_ref).values.flatten()

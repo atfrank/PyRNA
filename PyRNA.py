@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import network_line_graph as nlg
 import pandas as pd
 
-def dotfile2bp(ssfile):
+def SimRNAfile2bp(ssfile):
     ss = pd.read_csv(ssfile, header=None, sep = " ")
     ss = list(ss[0].values)
     bp_matrix = dot2bp(sequences=ss)
