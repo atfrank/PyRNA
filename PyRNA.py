@@ -49,6 +49,29 @@ def visualize_structure(bp_matrix, label = 'UUCG-tetraloop', edge_cmap = plt.cm.
 
   ax.text(0,1, label, transform=ax.transAxes, fontsize=18)
   plt.show()
+
+def basepair_matrix2CT(bp_matrix):
+    """ 
+    Generates data frame from base-pair matrix:
+        Input: base-pair matrix (numpy array)
+        Output: CT data frame (pandas)
+    """
+    col_names = ['n', 'name', 'n-1', 'n+1', 'base-pairing', 'natural_number']
+    res = np.array([i for i in range(1, bp_matrix.shape[0]+1) ])
+    ct = pd.DataFrame({"n": res,
+                       "name": ["X" for i in range(1, bp_matrix.shape[0]+1)],
+                       "n-1": list(res-1),
+                       "n+1": list(res+1),
+                       "base-pairing": [0 for i in res],
+                       "natural_number": res})
+
+    # Loop over bps array and then assign value of 1 on pair that are base-paired
+    for i in range(len(res)):
+        for j in range(len(res)):            
+                if bp_matrix[i,j] == 1:
+                    ct.at[i,'base-pairing'] = res[j]
+                    ct.at[j,'base-pairing'] = res[i]
+    return(ct)
     
 def CT2basepair_matrix(CT_file):
     """ Generates base-paired matrix from a CT file """
@@ -150,6 +173,8 @@ def state2CT(state):
                     ct.at[i,'base-pairing'] = res[j]
                     ct.at[j,'base-pairing'] = res[i]
     return(ct)
+
+
 
 def random_select_i(items):
     """ Make a random selection from a list 

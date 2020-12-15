@@ -1,4 +1,4 @@
-from PyRNA import SimRNAfile2bp, dot2bp, visualize_structure
+from PyRNA import SimRNAfile2bp, dot2bp, visualize_structure, basepair_matrix2CT
 import pandas as pd
 from sklearn.metrics import recall_score, precision_score, matthews_corrcoef
 
@@ -17,6 +17,11 @@ ref = pd.DataFrame.from_records(bp_matrix_ref).values.flatten()
 pre = pd.DataFrame.from_records(bp_matrix_pre).values.flatten()
 tpr, ppv, mcc = recall_score(y_true = ref, y_pred=pre), precision_score(y_true = ref, y_pred=pre), matthews_corrcoef(y_true = ref, y_pred=pre)
 print(tpr, ppv, mcc)
+
+
+ct = basepair_matrix2CT(bp_matrix_ref)
+ct.columns = ["get_ipython().run_line_magic("s"%ct.shape[0],", " \"\", \"\", \"\", \"\", \"\"]")
+ct.to_csv("data/SimRNA/reference.ct", sep = " ", index=False)
 
 
 visualize_structure(bp_matrix_ref, label="FSW-reference")
