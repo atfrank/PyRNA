@@ -50,7 +50,7 @@ def visualize_structure(bp_matrix, label = 'UUCG-tetraloop', edge_cmap = plt.cm.
   ax.text(0,1, label, transform=ax.transAxes, fontsize=18)
   plt.show()
 
-def basepair_matrix2CT(bp_matrix):
+def basepair_matrix2CT(bp_matrix, filename = None):
     """ 
     Generates data frame from base-pair matrix:
         Input: base-pair matrix (numpy array)
@@ -71,6 +71,9 @@ def basepair_matrix2CT(bp_matrix):
                 if bp_matrix[i,j] == 1:
                     ct.at[i,'base-pairing'] = res[j]
                     ct.at[j,'base-pairing'] = res[i]
+    if filename is not None:
+        ct.columns = ["%s"%ct.shape[0], "", "", "", "", ""]
+        ct.to_csv(filename, sep = " ", index=False)        
     return(ct)
     
 def CT2basepair_matrix(CT_file):

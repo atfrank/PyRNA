@@ -19,9 +19,8 @@ tpr, ppv, mcc = recall_score(y_true = ref, y_pred=pre), precision_score(y_true =
 print(tpr, ppv, mcc)
 
 
-ct = basepair_matrix2CT(bp_matrix_ref)
-ct.columns = ["get_ipython().run_line_magic("s"%ct.shape[0],", " \"\", \"\", \"\", \"\", \"\"]")
-ct.to_csv("data/SimRNA/reference.ct", sep = " ", index=False)
+ct = basepair_matrix2CT(bp_matrix_ref, filename = "data/SimRNA/reference.ct")
+ct = basepair_matrix2CT(bp_matrix_pre, filename = "data/SimRNA/predicted.ct")
 
 
 visualize_structure(bp_matrix_ref, label="FSW-reference")
